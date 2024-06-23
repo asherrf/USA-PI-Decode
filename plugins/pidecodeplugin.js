@@ -3,7 +3,7 @@ var pluginConfig = {
     name: 'PI Decode',
     version: '1.0',
     author: '.asherr (with GPT)',
-    frontEndPath: 'PiDecode/PiDecode.js'
+    frontEndPath: 'PiDecode/PiDecodePlugin.js'
 }
 
 // Backend (server) changes can go here...
