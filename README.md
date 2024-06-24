@@ -1,7 +1,10 @@
-# USA-PI-Decode
+# USA-PI-Decode for [FM Web Server](https://github.com/NoobishSVK/fm-dx-webserver)
 USA PI Decode plugin for FM Web Server
 
 Install Instructions:
+Download code from [here](https://github.com/asherrf/USA-PI-Decode/archive/refs/heads/main.zip)
+
+
 Extract Zip file.
 
 Move the "USA_PICODES.csv" into the web folder in your webserver
