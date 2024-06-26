@@ -2,7 +2,7 @@
 var pluginConfig = {
     name: 'PI Decode',
     version: '1.0',
-    author: '.asherr (with GPT)',
+    author: '.asherr',
     frontEndPath: 'PiDecode/PiDecodePlugin.js'
 }
 
