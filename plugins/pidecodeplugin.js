@@ -1,7 +1,7 @@
 // Plugin configuration, this is used in the administration when plugins are loaded
 var pluginConfig = {
     name: 'PI Decode',
-    version: '1.0',
+    version: '1.01',
     author: '.asherr',
     frontEndPath: 'PiDecode/PiDecodePlugin.js'
 }
