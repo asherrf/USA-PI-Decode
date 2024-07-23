@@ -16,5 +16,8 @@ Move the pidecodeplugin.js file and PiDecode folder into the webserver plugins f
 
 Apply the plugin in webserver settings
 
-.asherr on discord
+For support:
+
+.asherr on discord or 
+
 ashman8870@gmail.com
