@@ -65,7 +65,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    createPiDecodeContainer(); // Setup the PI decode panel
+    if (window.location.pathname === '/') {
+	    createPiDecodeContainer(); // Setup the PI decode panel
+	}
 
     loadDatabase(function(database) {
         updatePiDecode(database); // Populate the PI decode info initially
