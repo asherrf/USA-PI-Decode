@@ -4,11 +4,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!piDecodeContainer) {
             piDecodeContainer = document.createElement('div');
             piDecodeContainer.id = 'pi-decode-container';
-            piDecodeContainer.className = 'panel-33 hover-brighten';
+            piDecodeContainer.className = 'panel-33 hover-brighten tooltip';
             piDecodeContainer.style.height = '100px';
+            piDecodeContainer.style.position = 'relative'; // for toast positioning
+            piDecodeContainer.setAttribute(
+                'data-tooltip',
+                'This panel contains the current PI decode when RDS is loaded.<br><strong>Clicking on this panel copies the RAW PI code into the clipboard.</strong>'
+            );
             piDecodeContainer.innerHTML = `
                 <h2 style="margin-top: 4px;">PI DECODE</h2>
-                <div id="pi-decode">
+                <div id="pi-decode" role="button" tabindex="0" aria-label="Copy PI code to clipboard" style="cursor: pointer; user-select: none;">
                     <span></span>
                 </div>
                 <hr class="hide-desktop">
@@ -50,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updatePiDecode(database) {
         const piElement = document.getElementById('data-pi');
         const frequencyElement = document.getElementById('data-frequency');
-        
+
         const piCodeHex = piElement ? piElement.textContent.trim() : '0000';
         const piCodeDecimal = hexToDecimal(piCodeHex).toString();
         const frequencyText = frequencyElement ? frequencyElement.textContent.trim() : 'Default Frequency';
@@ -65,9 +70,54 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // --- New: click-to-copy support ---
+    function getRawPiCode() {
+        const piElement = document.getElementById('data-pi');
+        return (piElement ? piElement.textContent.trim() : '0000') || '0000';
+    }
+
+    async function copyToClipboard(text) {
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                // Fallback for older browsers
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.focus();
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+            }
+        } catch (e) {
+            console.error('Clipboard copy failed:', e);
+        }
+    }
+
+    function wireClickToCopy() {
+        const clickable = document.getElementById('pi-decode-container');
+        if (!clickable) return;
+
+        const handler = () => copyToClipboard(getRawPiCode());
+        clickable.addEventListener('click', handler);
+        clickable.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handler();
+            }
+        });
+        // Optional: tooltip hint
+        clickable.title = 'Click to copy raw PI code';
+    }
+    // --- End new code ---
+
     if (window.location.pathname === '/') {
-	    createPiDecodeContainer(); // Setup the PI decode panel
-	}
+        createPiDecodeContainer(); // Setup the PI decode panel
+        wireClickToCopy();         // Enable click-to-copy
+    }
 
     loadDatabase(function(database) {
         updatePiDecode(database); // Populate the PI decode info initially
