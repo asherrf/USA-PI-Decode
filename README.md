@@ -8,8 +8,5 @@ USA PI Decode plugin for FM Web Server
 - Move the pidecodeplugin.js file and PiDecode folder into the webserver plugins folder.'
 - Apply the plugin in webserver settings
 
-## **For support:**
+## **For support or to send PI updates:**
 .asherr on discord or email asher@asherr.org
-
-## **For Pi Updates:**
-Message on discord or email
