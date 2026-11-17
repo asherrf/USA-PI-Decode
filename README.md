@@ -9,4 +9,7 @@ USA PI Decode plugin for FM Web Server
 - Apply the plugin in webserver settings
 
 ## **For support:**
-.asherr on discord or ashman8870@gmail.com
+.asherr on discord or email asher@asherr.org
+
+## **For Pi Updates:**
+Message on discord or email
